@@ -1,25 +1,24 @@
-install.packages("dplyr")
 library(dplyr)
-par(family = "HiraKakuProN-W3") # to put Japanese on figure
+par(family= "HiraKakuProN-W3") # to put Japanese on figure
 
 # make RGB colors
-palette_mono <- data.frame(numbers = 255:246, keys = rep(0, 10))
+palette_mono <- data.frame(numbers=255:246, keys=rep(0, 10))
 palette_bi <- left_join(palette_mono, palette_mono, by = "keys")
-palette_tri <- left_join(palette_mono, palette_bi, by = "keys")
+palette_tri <-left_join(palette_mono, palette_bi, by = 'keys')
 
 palette <- 
   palette_tri %>%
-  select(R = numbers.x, G = numbers.y, B = numbers)
+  select(R=numbers.x, G=numbers.y, B=numbers)
 
 # arrange in order of proximity to (R, G, B) = (255, 255, 255)
-ds_sq = c()
+ds_sq <- c()
 for (i in 1:nrow(palette)) {
   d_sq = (palette[[1]][i])^2 + (palette[[2]][i])^2 + (palette[[3]][i])^2
-  ds_sq = c(ds_sq, d_sq)
+  ds_sq <- c(ds_sq, d_sq)
 }
 palette <-
   palette %>%
-  mutate(SquaredDistance = ds_sq)
+  mutate(SquaredDistance=ds_sq)
 palette <- palette[order(palette$SquaredDistance, decreasing=T), ]
 
 anmika <- function(n=200) {
@@ -37,8 +36,8 @@ anmika <- function(n=200) {
   width = b
   x <- 1:width
   y <- rep(1:height, width/height)
-  coordinates <- expand.grid(x, y)
-  coordinates_random <- sample_n(tbl = coordinates, size = nrow(coordinates))
+  coordinates = expand.grid(x, y)
+  coordinates_random = sample_n(tbl = coordinates, size = nrow(coordinates))
   
   for (i in 1:n) {
     # convert decimal into hexadecimal
@@ -57,10 +56,10 @@ anmika <- function(n=200) {
     par(new=T)
   }
   title(paste0('白って', n, '色あんねん'))
-  # output
+  # output .png
   dev.copy(png, file = paste0("white", n, ".png"))
   dev.off()
 }
 
 input <- readline("Enter any number (1~1000): ")
-anmika(as.numeric(input))
+anmika(as.integer(input))
