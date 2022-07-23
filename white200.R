@@ -1,4 +1,4 @@
-install(dplyr)
+install.packages("dplyr")
 library(dplyr)
 par(family = "HiraKakuProN-W3") # to put Japanese on figure
 
