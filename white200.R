@@ -43,7 +43,7 @@ anmika <- function(n=200) {
     # convert decimal into hexadecimal
     ffs = c()
     for (j in 1:3) {
-      ff = sprintf("%02X", palette[[j]][n])
+      ff = sprintf("%02X", palette[[j]][i])
       ffs = c(ffs, ff)
     }
     RGB = paste0('#', ffs[1], ffs[2], ffs[3])
