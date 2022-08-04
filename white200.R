@@ -1,5 +1,5 @@
 library(dplyr)
-par(family= "HiraKakuProN-W3") # to put Japanese on figure
+par(family="HiraKakuProN-W3") # to put Japanese on figure
 
 # make RGB colors
 palette_mono <- data.frame(numbers=255:246, keys=rep(0, 10))
